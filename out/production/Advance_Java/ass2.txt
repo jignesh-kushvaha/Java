@@ -1,0 +1,71 @@
+1. Write a Java Program to perform operations on Complex numbers. (Use objects)
+-> 
+    public class ComplexNumber {
+        int real,imagine;
+
+        public ComplexNumber(int real, int imagine){
+            this.real = real;
+            this.imagine = imagine;
+        }
+
+        public void show(){
+            System.out.println(real + " + " + imagine + "i");
+        }
+
+        public ComplexNumber add(ComplexNumber n2){
+            ComplexNumber newNumber = new ComplexNumber(0,0);
+            newNumber.real = this.real + n2.real;
+            newNumber.imagine = this.imagine + n2.imagine;
+            return newNumber;
+        }
+
+        public static void main(String[] args) {
+            ComplexNumber c1 = new ComplexNumber(5,5);
+            ComplexNumber c2 = new ComplexNumber(10,50);
+
+            ComplexNumber sum = c1.add(c2);
+            sum.show();
+
+        }    
+    }
+
+2. Write a Java Program to perform operations on Vectors. (i.e. x,y,z co-ordinates.) (Use objects)
+-> 
+    public class VectorsOperation {
+        private double x;
+        private double y;
+        private double z;
+
+        public VectorsOperation(double x, double y, double z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
+        public VectorsOperation add(VectorsOperation ob) {
+            return new VectorsOperation(this.x + ob.x, this.y + ob.y, this.z + ob.z);
+        }
+        public VectorsOperation sub(VectorsOperation ob) {
+            return new VectorsOperation(this.x - ob.x, this.y - ob.y, this.z - ob.z);
+        }
+
+        public void showData() {
+            System.out.println("Vector data: (" + x + ", " + y + ", " + z + ")");
+        }
+
+        public String toString() {
+            return "VectorsOperation(" + x + ", " + y + ", " + z + ")";
+        }
+
+        public static void main(String[] args) {
+            VectorsOperation vob1 = new VectorsOperation(10, 20, 30);
+            VectorsOperation vob2 = new VectorsOperation(40, 50, 60);
+
+            VectorsOperation addResult = vob1.add(vob2);
+            addResult.showData();
+            
+            VectorsOperation subResult = vob1.sub(vob2);
+            System.out.println(subResult);
+        
+        }
+    }
