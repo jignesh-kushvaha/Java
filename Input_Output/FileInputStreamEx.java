@@ -24,13 +24,14 @@ public class FileInputStreamEx {
 //              //  }
 //            }
 //       // }
-
+        int size;
         File ofile = new File("C:\\Users\\Jignesh\\Desktop\\mca_sem_3\\Advance_Java\\Input_Output\\sample.txt");
         FileInputStream ofis = new FileInputStream(ofile);
 
         int i = 0;
         while((i = ofis.read()) != -1){
             System.out.println(i + " read " + (char)i);
+            System.out.println("Total Available Bytes: " + (size = ofis.available()));
         }
 
         if(ofis!=null){
