@@ -21,14 +21,15 @@ public class ServerSide {
         String receivedMsg;
         String sendMsg;
         do {
+            System.out.println();
             receivedMsg = odis.readUTF();
-            System.out.println(receivedMsg);
+            System.out.println("Received msg : " + receivedMsg);
 
+            System.out.print("Send msg : ");
             sendMsg = obr.readLine();
             odos.writeUTF(sendMsg);
-            System.out.println(sendMsg);
-
-        } while (!receivedMsg.equals("stop"));
+            System.out.println("Send msg Successfully : ");
+        } while (!sendMsg.equals("stop") || !receivedMsg.equals("stop"));
 
         odis.close();
         s.close();
