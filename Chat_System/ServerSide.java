@@ -9,15 +9,29 @@ public class ServerSide {
         DataOutputStream odos;
 
         ServerSocket ss = new ServerSocket(5555);
+        System.out.println("Server is online...");
+
         s = ss.accept();
+        System.out.println("Client is connected...");
+
         odis = new DataInputStream(s.getInputStream());
         odos = new DataOutputStream(s.getOutputStream());
+        BufferedReader obr = new BufferedReader(new InputStreamReader(System.in));
 
-        int i;
+        String receivedMsg;
+        String sendMsg;
         do {
-            i = odis.read();
-            System.out.println((char)(i + 1));
-        } while ((char) i != 'q');
+            receivedMsg = odis.readUTF();
+            System.out.println(receivedMsg);
 
+            sendMsg = obr.readLine();
+            odos.writeUTF(sendMsg);
+            System.out.println(sendMsg);
+
+        } while (!receivedMsg.equals("stop"));
+
+        odis.close();
+        s.close();
+        ss.close();
     }
 }

@@ -6,19 +6,28 @@ public class ClientSide {
         Socket s;
         DataInputStream odis;
         DataOutputStream odos;
-
+        System.out.println("start..");
         s = new Socket("localhost", 5555);
+        System.out.println("Client is online...");
+
         odis = new DataInputStream(s.getInputStream());
         odos = new DataOutputStream(s.getOutputStream());
         BufferedReader obr = new BufferedReader(new InputStreamReader(System.in));
 
-        int i;
+        String sendMsg;
+        String receivedMsg;
         do {
-            i = obr.read();
-            odos.write((char) i);
-        } while ((char) i != 'q');
+            sendMsg = obr.readLine();
+            odos.writeUTF(sendMsg);
+//            System.out.println(sendMsg);
+
+            receivedMsg = odis.readUTF();
+            System.out.println(receivedMsg);
+
+        } while (!sendMsg.equals("stop"));
 
         obr.close();
-
+        odos.close();
+        s.close();
     }
 }
