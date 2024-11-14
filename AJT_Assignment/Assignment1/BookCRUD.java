@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 public class BookCRUD {
-    private static final String FILE_NAME = "Books.dat";
+    private static final String FILE_NAME = "AJT_Assignment/Assignment1/Books.dat";
     public static void saveBook(Book book) {
         try {
             File file = new File(FILE_NAME);
@@ -32,7 +32,10 @@ public class BookCRUD {
 
     public static List<Book> readBooks() {
         List<Book> books = new ArrayList<>();
-        
+        File file = new File(FILE_NAME);
+        if(!file.exists()){
+            return null;
+        }
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
             while (true) {
                 try {
@@ -48,7 +51,7 @@ public class BookCRUD {
         return books;
     }
 
-    public static Book queryBook(String query) {
+    public static Book searchBook(String query) {
         for (Book book : readBooks()) {
             if (String.valueOf(book.getBookId()).equals(query) ||
                     book.getTitle().equalsIgnoreCase(query) ||

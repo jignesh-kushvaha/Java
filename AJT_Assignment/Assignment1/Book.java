@@ -4,15 +4,14 @@ import java.io.Serializable;
 
 public class Book implements Serializable {
     private static final long serialVersionUID = 1L;
-    private static int lastBookId = 0;
     private int bookId;
     private String title;
     private String author;
     private String publisher;
     private Double price;
 
-    public Book(String title,String author,String publisher,Double price){
-        this.bookId = ++lastBookId;
+    public Book(int bookId,String title,String author,String publisher,Double price){
+        this.bookId = bookId;
         this.title = title;
         this.author = author;
         this.publisher = publisher;

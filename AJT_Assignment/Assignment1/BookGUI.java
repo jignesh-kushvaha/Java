@@ -7,7 +7,7 @@ import java.awt.event.*;
 import java.util.List;
 
 public class BookGUI extends JFrame{
-    private JTextField txtTitle, txtAuthorName, txtPublication, txtPrice, txtSearch;
+    private JTextField txtBookId,txtTitle, txtAuthorName, txtPublication, txtPrice, txtSearch;
     private JTable table;
     private DefaultTableModel tableModel;
 
@@ -18,13 +18,16 @@ public class BookGUI extends JFrame{
         setLayout(new BorderLayout());
 
         // Left Input Panel
-        JPanel inputPanel = new JPanel(new GridLayout(7, 2, 5, 5));
+        JPanel inputPanel = new JPanel(new GridLayout(7, 3, 5, 5));
+        txtBookId = new JTextField();
         txtTitle = new JTextField();
         txtAuthorName = new JTextField();
         txtPublication = new JTextField();
         txtPrice = new JTextField();
         txtSearch = new JTextField();
 
+        inputPanel.add(new JLabel("Book Id:"));
+        inputPanel.add(txtBookId);
         inputPanel.add(new JLabel("Book Name:"));
         inputPanel.add(txtTitle);
         inputPanel.add(new JLabel("Author Name:"));
@@ -40,7 +43,7 @@ public class BookGUI extends JFrame{
 
         inputPanel.add(btnAdd);
         inputPanel.add(btnDisplay);
-//        inputPanel.add(new JLabel("Search by ID/Name:"));
+
         inputPanel.add(txtSearch);
         inputPanel.add(btnSearch);
 
@@ -63,13 +66,14 @@ public class BookGUI extends JFrame{
 
     private void addBook() {
         try {
+            int bookid = Integer.parseInt(txtBookId.getText());
             String title = txtTitle.getText();
             String authorName = txtAuthorName.getText();
             String publication = txtPublication.getText();
             double price = Double.parseDouble(txtPrice.getText());
             System.out.println(title + " "+ authorName +" ");
 
-            Book book = new Book(title, authorName, publication, price);
+            Book book = new Book(bookid,title, authorName, publication, price);
             BookCRUD.saveBook(book);
             clearFields();
             JOptionPane.showMessageDialog(null, "Added Successfully...");
@@ -80,19 +84,23 @@ public class BookGUI extends JFrame{
 
     private void displayBooks() {
         List<Book> books = BookCRUD.readBooks();
-        tableModel.setRowCount(0);
-        for (Book book : books) {
-            tableModel.addRow(new Object[]{
-                    book.getBookId(), book.getTitle(),
-                    book.getAuthor(), book.getPublisher(),
-                    book.getPrice()
-            });
+        if(books == null) {
+            JOptionPane.showMessageDialog(null, "File not found");
+        }else{
+            tableModel.setRowCount(0);
+            for (Book book : books) {
+                tableModel.addRow(new Object[]{
+                        book.getBookId(), book.getTitle(),
+                        book.getAuthor(), book.getPublisher(),
+                        book.getPrice()
+                });
+            }
         }
     }
 
     private void searchBook() {
         String query = txtSearch.getText();
-        Book book = BookCRUD.queryBook(query);
+        Book book = BookCRUD.searchBook(query);
         if (book != null) {
             JOptionPane.showMessageDialog(null,
                     "Found: " + book.getTitle() + " by " + book.getAuthor());
@@ -105,7 +113,7 @@ public class BookGUI extends JFrame{
         txtAuthorName.setText("");
         txtPublication.setText("");
         txtPrice.setText("");
-//        txtSearch.setText("");
+        txtSearch.setText("");
     }
 
     public static void main(String[] args) {
