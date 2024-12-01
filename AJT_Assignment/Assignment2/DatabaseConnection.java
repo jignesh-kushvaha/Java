@@ -1,3 +1,5 @@
+package AJT_Assignment.Assignment2;
+
 import java.sql.*;
 public class DatabaseConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/demo";

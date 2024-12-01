@@ -1,20 +1,22 @@
 package AJT_Assignment.Assignment1;
 
-import java.io.Serializable;
+import java.io.*;
 
-public class Book implements Serializable {
+class Book implements Serializable {
     private static final long serialVersionUID = 1L;
+
     private int bookId;
-    private String title;
-    private String author;
-    private String publisher;
+    private String bookName;
+    private String authorName;
+    private String publication;
+
     private Double price;
 
-    public Book(int bookId,String title,String author,String publisher,Double price){
+    public Book(int bookId, String bookName, String authorName, String publication, Double price) {
         this.bookId = bookId;
-        this.title = title;
-        this.author = author;
-        this.publisher = publisher;
+        this.bookName = bookName;
+        this.authorName = authorName;
+        this.publication = publication;
         this.price = price;
     }
 
@@ -22,28 +24,40 @@ public class Book implements Serializable {
         return bookId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getBookName() {
+        return bookName;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public String getPublication() {
+        return publication;
     }
 
-    public double getPrice() {
+    public Double getPrice(){
         return price;
     }
 
-
-
-
-    @Override
-    public String toString(){
-        return bookId + "," + title + "," + author + "," + publisher + ",₹" + price;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public void setPublication(String publication) {
+        this.publication = publication;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%-10s %-40s %-20s %-25s %-15s", bookId, bookName, authorName, publication,price);
+    }
 }
