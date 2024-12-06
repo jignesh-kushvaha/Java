@@ -1,7 +1,5 @@
 package AJT_Assignment.Assignment2;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud;
-
 import java.sql.*;
 import java.util.Scanner;
 

@@ -2,7 +2,7 @@ package AJT_Assignment.Assignment1;
 
 import java.io.*;
 
-class Book implements Serializable {
+public class Book implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private int bookId;
