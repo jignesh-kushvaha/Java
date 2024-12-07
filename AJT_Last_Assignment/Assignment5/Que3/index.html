@@ -1,0 +1,35 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Based Access</title>
+</head>
+<body>
+    <div>
+        <h2>Enter Role to Access Book Search Page</h2>
+        <form action="RoleServlet" method="post">
+            <label for="role">Enter Role (admin/user):</label>
+            <input type="text" id="role" name="role" placeholder="Enter your role" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+</head>
+<body>
+    <h2>Enter Book ID to Fetch Details</h2>
+    <form action="BookSearchServlet" method="get">
+        <label for="bookid">Book ID:</label>
+        <input type="text" id="bookid" name="bookid">
+        <button type="submit">Get Book Details</button>
+    </form>
+</body>
+</html>
